@@ -8,8 +8,9 @@ input.addEventListener("change", function () {
     
     reader.addEventListener('load', function (e) {
       output.textContent = e.target.result;
+      output.value = output.textContent;
+      sessionStorage.setItem("inputContent", output.value);
     });
-    
     reader.readAsBinaryString(myFile);
   }
 });
