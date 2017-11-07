@@ -8,53 +8,47 @@ $(document).ready(function() {
     jsonData = JSON.parse(inputContent);
 
     //buttons
+    
+    for(var i = 0; i < jsonData.elements.length; i++)
+    {
+        var element = jsonData.elements[i];
+        if(element.button != null){
+            element = element.button;
+            text = element.text;
+            width = element.width;
+            height = element.height;
+            xpos = element["x-pos"];
+            ypos = element["y-pos"];
+
+            newElement = document.createElement('button');  
+            parse(text, width, height, xpos, ypos);
+        }else if(element.textfield != null){
+            element = element.textfield;
+            text = element.text;
+            width = element.width;
+            height = element.height;
+            xpos = element["x-pos"];
+            ypos = element["y-pos"];
+
+            newElement = document.createElement('INPUT'); 
+            newElement.setAttribute("type", "text");
+            newElement.setAttribute("value", text);
+            parse(text, width, height, xpos, ypos);
+            
+        }else if(element.label != null){
+            element = element.label;
+            text = element.text;
+            width = element.width;
+            height = element.height;
+            xpos = element["x-pos"];
+            ypos = element["y-pos"];
+
+            newElement = document.createElement('span'); 
+            parse(text, width, height, xpos, ypos);
+        }
+        
+    }
    
-    for(var i=0;i<jsonData.buttons.length;i++)
-    {   
-        var element = jsonData.buttons[i];
-        text = element.text;
-        width = element.width;
-        height = element.height;
-        xpos = element["x-pos"];
-        ypos = element["y-pos"];
-        
-        newElement = document.createElement('button');  
-        parse(text, width, height, xpos, ypos);
-    }
-
-    //textfields
- 
-    for(var i=0;i<jsonData.textfields.length;i++)
-    {   
-        var element = jsonData.textfields[i];
-        text = element.text;
-        width = element.width;
-        height = element.height;
-        xpos = element["x-pos"];
-        ypos = element["y-pos"];
-        
-        newElement = document.createElement('INPUT'); 
-        newElement.setAttribute("type", "text");
-        newElement.setAttribute("value", text);
-        parse(text, width, height, xpos, ypos);
-    }
-
-    //labels
-
-
-    for(var i=0;i<jsonData.labels.length;i++)
-    {   
-        var element = jsonData.labels[i];
-        text = element.text;
-        width = element.width;
-        height = element.height;
-        xpos = element["x-pos"];
-        ypos = element["y-pos"];
-        
-        newElement = document.createElement('span'); 
-        parse(text, width, height, xpos, ypos);
-    }
-
 });
 
                   
